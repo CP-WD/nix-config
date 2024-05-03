@@ -23,6 +23,8 @@
     userEmail = "hkana2912@outlook.com";
   };
 
+  programs.neovim.enable = true;
+
   dconf.settings = {
     "org/gnome/shell" = {
       # お気に入りのアプリ
