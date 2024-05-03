@@ -13,6 +13,8 @@
     zoom
     _1password-gui
     _1password
+    go
+    volta
   ];
 
   # programs.nvim.enable = true;
