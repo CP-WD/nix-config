@@ -7,6 +7,8 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    xremap.url = "github:xremap/nix-flake";
   };
 
     outputs = inputs@{ nixpkgs, home-manager, ... }: {
@@ -29,6 +31,9 @@
             # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
           }
         ];
+        specialArgs = {
+          inherit inputs; # `inputs = inputs;`と等しい
+        };
       };
     };
   };

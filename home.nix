@@ -13,6 +13,9 @@
     zoom
     _1password-gui
     _1password
+    go
+    nodejs
+    gcc
   ];
 
   # programs.nvim.enable = true;
