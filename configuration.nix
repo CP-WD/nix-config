@@ -48,7 +48,7 @@
     LC_NUMERIC = "ja_JP.UTF-8";
     LC_PAPER = "ja_JP.UTF-8";
     LC_TELEPHONE = "ja_JP.UTF-8";
-    LC_TIME = "ja_JP.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
   # Enable the X11 windowing system.
@@ -84,7 +84,7 @@
   };
 
   # Configure console keymap
-  console.keyMap = "jp106";
+  console.keyMap = "us";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

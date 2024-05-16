@@ -14,7 +14,8 @@
     _1password-gui
     _1password
     go
-    volta
+    nodejs
+    gitkraken
   ];
 
   # programs.nvim.enable = true;
@@ -43,6 +44,11 @@
     # 最大化ボタンや最小化ボタンを表示
     "org/gnome/desktop/wm/preferences" = {
       button-layout = ":minimize,maximize,close";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/control-center-static" = {
+      use-default-value = false;
+      custom-value = [""];
     };
   };
 
