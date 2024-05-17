@@ -18,8 +18,6 @@
     gitkraken
   ];
 
-  # programs.nvim.enable = true;
-
   programs.git = {
     enable = true;
     userName = "CP-WD";
@@ -28,27 +26,16 @@
 
   programs.neovim.enable = true;
 
-  dconf.settings = {
-    "org/gnome/shell" = {
-      # お気に入りのアプリ
-      favorite-apps = [
-        "code.desktop"
-        "vivaldi-stable.desktop"
-        "org.gnome.Console.desktop"
-        "1password.desktop"
-        "spotify.desktop"
-        "slack.desktop"
-      ];
-    };
-
-    # 最大化ボタンや最小化ボタンを表示
-    "org/gnome/desktop/wm/preferences" = {
-      button-layout = ":minimize,maximize,close";
-    };
-
-    "org/gnome/settings-daemon/plugins/media-keys/control-center-static" = {
-      use-default-value = false;
-      custom-value = [""];
+  xsession.windowManager.i3 = {
+    enable = true;
+    package = pkgs.i3-gaps;
+    config = {
+      modifier = "Mod4";
+      # bars.i3status.position = "bottom";
+      gaps = {
+        inner = 8;
+        outer = 0;
+      };
     };
   };
 
