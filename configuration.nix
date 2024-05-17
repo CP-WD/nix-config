@@ -50,7 +50,7 @@
     LC_NUMERIC = "ja_JP.UTF-8";
     LC_PAPER = "ja_JP.UTF-8";
     LC_TELEPHONE = "ja_JP.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_TIME = "ja_JP.UTF-8";
   };
 
   services.xserver = {
@@ -88,7 +88,7 @@
   };
 
   # Configure console keymap
-  console.keyMap = "us";
+  console.keyMap = "jp106";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

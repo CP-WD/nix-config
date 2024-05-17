@@ -14,8 +14,7 @@
     _1password-gui
     _1password
     go
-    nodejs
-    gitkraken
+    volta
   ];
 
   programs.git = {
@@ -26,16 +25,22 @@
 
   programs.neovim.enable = true;
 
-  xsession.windowManager.i3 = {
-    enable = true;
-    package = pkgs.i3-gaps;
-    config = {
-      modifier = "Mod4";
-      # bars.i3status.position = "bottom";
-      gaps = {
-        inner = 8;
-        outer = 0;
-      };
+  dconf.settings = {
+    "org/gnome/shell" = {
+      # お気に入りのアプリ
+      favorite-apps = [
+        "code.desktop"
+        "vivaldi-stable.desktop"
+        "org.gnome.Console.desktop"
+        "1password.desktop"
+        "spotify.desktop"
+        "slack.desktop"
+      ];
+    };
+
+    # 最大化ボタンや最小化ボタンを表示
+    "org/gnome/desktop/wm/preferences" = {
+      button-layout = ":minimize,maximize,close";
     };
   };
 
