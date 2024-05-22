@@ -50,36 +50,34 @@
     LC_NUMERIC = "ja_JP.UTF-8";
     LC_PAPER = "ja_JP.UTF-8";
     LC_TELEPHONE = "ja_JP.UTF-8";
-    LC_TIME = "ja_JP.UTF-8";
-  };
-
-  services.xserver = {
-    enable = true;
-    desktopManager = {
-      xterm.enable = false;
-      xfce = {
-        enable = true;
-        noDesktop = true;
-        enableXfwm = false;
-      };
-    };
-    displayManager.defaultSession = "xfce+i3";
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-      ];
-    };
+    LC_TIME = "en_US.UTF-8";
   };
 
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
+  services.xserver.enable = true;
 
-  # # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
+  # Enable the GNOME Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+  ]) ++ (with pkgs.gnome; [
+    cheese # webcam tool
+    gnome-music
+    gnome-terminal
+    gedit # text editor
+    epiphany # web browser
+    geary # email reader
+    evince # document viewer
+    gnome-characters
+    totem # video player
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+  ]);
 
   # Configure keymap in X11
   services.xserver = {
@@ -128,6 +126,7 @@
     ibus
     ibus-engines.mozc
   ];
+
 
   i18n.inputMethod = {
     enabled = "ibus";
