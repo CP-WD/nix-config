@@ -119,6 +119,7 @@
   environment.systemPackages = with pkgs; [
     ibus
     ibus-engines.mozc
+    gnomeExtensions.forge
   ];
 
   i18n.inputMethod = {
@@ -159,6 +160,7 @@
             "CapsLock" = "LEFTALT";
             "APOSTROPHE" = "RIGHTCTRL";
             "SEMICOLON" = "ENTER";
+            "TAB" = "ESC";
           };
         }
       ];
@@ -177,7 +179,7 @@
             "MUHENKAN-t" = "TAB";
             "MUHENKAN-n" = "BackSpace";
 
-            "MUHENKAN-SEMICOLON" = "F13";
+            "MUHENKAN-Enter" = "shift-space";
           };
         }
         {
