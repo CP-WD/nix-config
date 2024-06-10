@@ -11,7 +11,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ] ++ [
-      inputs.xremap.nixosModules.default
+      # inputs.xremap.nixosModules.default
     ];
 
   # Bootloader.
@@ -47,43 +47,50 @@
     LC_TIME = "ja_JP.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # # Enable the X11 windowing system.
+  # services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # # Enable the GNOME Desktop Environment.
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-photos
-    gnome-tour
-  ]) ++ (with pkgs.gnome; [
-    cheese # webcam tool
-    gnome-music
-    gnome-terminal
-    gedit # text editor
-    epiphany # web browser
-    geary # email reader
-    evince # document viewer
-    gnome-characters
-    totem # video player
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
-  ]);
+  # environment.gnome.excludePackages = (with pkgs; [
+  #   gnome-photos
+  #   gnome-tour
+  # ]) ++ (with pkgs.gnome; [
+  #   cheese # webcam tool
+  #   gnome-music
+  #   gnome-terminal
+  #   gedit # text editor
+  #   epiphany # web browser
+  #   geary # email reader
+  #   evince # document viewer
+  #   gnome-characters
+  #   totem # video player
+  #   tali # poker game
+  #   iagno # go game
+  #   hitori # sudoku game
+  #   atomix # puzzle game
+  # ]);
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
+  # # Configure keymap in X11
+  # services.xserver = {
+  #   layout = "us";
+  #   xkbVariant = "";
+  # };
+
+  # programs.hyprland = {
+  #   enable = true;
+  #   package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  # };
 
   # Configure console keymap
   console.keyMap = "jp106";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  hardware.opengl.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -112,7 +119,10 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = _: true;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -145,70 +155,70 @@
     };
   };
 
-  services.xremap = {
-    userName = "gavagai";
-    serviceMode = "system";
-    config = {
-      virtual_modifiers = [
-        "MUHENKAN"
-        "HENKAN"
-      ];
-      modmap = [
-        {
-          name = "";
-          remap = {
-            "CapsLock" = "LEFTALT";
-            "APOSTROPHE" = "RIGHTCTRL";
-            "SEMICOLON" = "ENTER";
-            "TAB" = "ESC";
-          };
-        }
-      ];
-      keymap = [
-        {
-          name = "Muhenkan";
-          remap = {
-            "MUHENKAN-y" = "Home";
-            "MUHENKAN-o" = "End";
+  # services.xremap = {
+  #   userName = "gavagai";
+  #   serviceMode = "system";
+  #   config = {
+  #     virtual_modifiers = [
+  #       "MUHENKAN"
+  #       "HENKAN"
+  #     ];
+  #     modmap = [
+  #       {
+  #         name = "";
+  #         remap = {
+  #           "CapsLock" = "LEFTALT";
+  #           "APOSTROPHE" = "RIGHTCTRL";
+  #           "SEMICOLON" = "ENTER";
+  #           "TAB" = "ESC";
+  #         };
+  #       }
+  #     ];
+  #     keymap = [
+  #       {
+  #         name = "Muhenkan";
+  #         remap = {
+  #           "MUHENKAN-y" = "Home";
+  #           "MUHENKAN-o" = "End";
 
-            "MUHENKAN-h" = "Left";
-            "MUHENKAN-j" = "Down";
-            "MUHENKAN-k" = "Up";
-            "MUHENKAN-l" = "Right";
+  #           "MUHENKAN-h" = "Left";
+  #           "MUHENKAN-j" = "Down";
+  #           "MUHENKAN-k" = "Up";
+  #           "MUHENKAN-l" = "Right";
 
-            "MUHENKAN-t" = "TAB";
-            "MUHENKAN-n" = "BackSpace";
+  #           "MUHENKAN-t" = "TAB";
+  #           "MUHENKAN-n" = "BackSpace";
 
-            "MUHENKAN-Enter" = "shift-space";
-          };
-        }
-        {
-          name = "henkan";
-          remap = {
-            "HENKAN-q" = "1";
-            "HENKAN-w" = "2";
-            "HENKAN-e" = "3";
-            "HENKAN-r" = "4";
-            "HENKAN-t" = "5";
-            "HENKAN-y" = "6";
-            "HENKAN-u" = "7";
-            "HENKAN-i" = "8";
-            "HENKAN-o" = "9";
-            "HENKAN-p" = "0";
+  #           "MUHENKAN-Enter" = "shift-space";
+  #         };
+  #       }
+  #       {
+  #         name = "henkan";
+  #         remap = {
+  #           "HENKAN-q" = "1";
+  #           "HENKAN-w" = "2";
+  #           "HENKAN-e" = "3";
+  #           "HENKAN-r" = "4";
+  #           "HENKAN-t" = "5";
+  #           "HENKAN-y" = "6";
+  #           "HENKAN-u" = "7";
+  #           "HENKAN-i" = "8";
+  #           "HENKAN-o" = "9";
+  #           "HENKAN-p" = "0";
 
-            "HENKAN-m" = "APOSTROPHE";
-            "HENKAN-n" = "SEMICOLON";
+  #           "HENKAN-m" = "APOSTROPHE";
+  #           "HENKAN-n" = "SEMICOLON";
 
-            "HENKAN-h" = "LEFTBRACE";
-            "HENKAN-j" = "RIGHTBRACE";
-            "HENKAN-k" = "MINUS";
-            "HENKAN-l" = "EQUAL";
-            "HENKAN-SEMICOLON" = "BACKSLASH";
-          };
-        }
-      ];
-    };
-  };
+  #           "HENKAN-h" = "LEFTBRACE";
+  #           "HENKAN-j" = "RIGHTBRACE";
+  #           "HENKAN-k" = "MINUS";
+  #           "HENKAN-l" = "EQUAL";
+  #           "HENKAN-SEMICOLON" = "BACKSLASH";
+  #         };
+  #       }
+  #     ];
+  #   };
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

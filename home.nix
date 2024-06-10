@@ -16,12 +16,10 @@
     go
     nodejs
     gcc
-    gnome.gnome-tweaks
-    gnome-extension-manager
-    gnome.dconf-editor
+    python3
   ];
 
-  # programs.nvim.enable = true;
+  programs.neovim.enable = true;
 
   programs.git = {
     enable = true;
@@ -29,72 +27,51 @@
     userEmail = "hkana2912@outlook.com";
   };
 
-  dconf.settings = {
-    "org/gnome/shell" = {
-      # お気に入りのアプリ
-      favorite-apps = [
-        "code.desktop"
-        "vivaldi-stable.desktop"
-        "org.gnome.Console.desktop"
-        "1password.desktop"
-        "spotify.desktop"
-        "slack.desktop"
+  systemd.user.startServices = "sd-switch";
+
+  programs.alacritty.enable = true;
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    settings = {
+      bind = [
+        "SUPER,Return,exec,alacritty"
+
+        "SUPERSHIFT,q,killactive"
+        "SUPERSHIFT,e,exit"
+        "SUPERSHIFT,f,fullscreen"
+
+        "SUPER,h,movefocus,left"
+        "SUPER,j,movefocus,down"
+        "SUPER,k,movefocus,up"
+        "SUPER,l,movefocus,right"
+        "SUPERSHIFT,h,swapwindow,left"
+        "SUPERSHIFT,j,swapwindow,down"
+        "SUPERSHIFT,k,swapwindow,up"
+        "SUPERSHIFT,l,swapwindow,right"
+
+        "SUPER,1,workspace,1"
+        "SUPER,2,workspace,2"
+        "SUPER,3,workspace,3"
+        "SUPER,4,workspace,4"
+        "SUPER,5,workspace,5"
+        "SUPER,6,workspace,6"
+        "SUPER,7,workspace,7"
+        "SUPER,8,workspace,8"
+        "SUPER,9,workspace,9"
+        "SUPER,0,workspace,0"
+        "SUPERSHIFT,1,movetoworkspace,1"
+        "SUPERSHIFT,2,movetoworkspace,2"
+        "SUPERSHIFT,3,movetoworkspace,3"
+        "SUPERSHIFT,4,movetoworkspace,4"
+        "SUPERSHIFT,5,movetoworkspace,5"
+        "SUPERSHIFT,6,movetoworkspace,6"
+        "SUPERSHIFT,7,movetoworkspace,7"
+        "SUPERSHIFT,8,movetoworkspace,8"
+        "SUPERSHIFT,9,movetoworkspace,9"
+        "SUPERSHIFT,0,movetoworkspace,0"
       ];
-
-      enabled-extensions = [
-        "forge@jmmaranan.com"
-      ];
     };
-
-    # 最大化ボタンや最小化ボタンを表示
-    "org/gnome/desktop/wm/preferences" = {
-      button-layout = ":minimize,maximize,close";
-    };
-
-    # Forge
-    "org/gnome/shell/extensions/forge" = {
-      window-gap-hidden-on-single = true;
-    };
-    "org/gnome/desktop/wm/keybindings/switch-to-workspace-left"."@as" = ["<Super>y"];
-    "org/gnome/desktop/wm/keybindings/switch-to-workspace-right"."@as" = ["<Super>u"];
-
-    "org/gnome/settings-daemon/plugins/media-keys/help"."@as" =  [];
-    "org/gnome/desktop/wm/keybindings/minimize"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/maximize"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/unmaximize"."@as" = [];
-
-    "org/gnome/mutter/keybindings/toggle-tiled-left"."@as" = [];
-    "org/gnome/mutter/keybindings/toggle-tiled-right"."@as" = [];
-
-    "org/gnome/settings-daemon/plugins/media-keys/screenreader"."@as" = [];
-    "org/gnome/settings-daemon/plugins/media-keys/magnifier"."@as" = [];
-    "org/gnome/settings-daemon/plugins/media-keys/magnifier-zoom-in"."@as" = [];
-    "org/gnome/settings-daemon/plugins/media-keys/magnifier-zoom-out"."@as" = [];
-
-    "org/gnome/desktop/wm/keybindings/move-to-monitor-down"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/move-to-monitor-left"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/move-to-monitor-right"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/move-to-monitor-up"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/move-to-workspace-left"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/move-to-workspace-right"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/move-to-workspace-last"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/move-to-workspace-1"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/switch-applications"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/switch-applications-backward"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/switch-to-workspace-last"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/switch-to-workspace-1"."@as" = [];
-    # "org/gnome/desktop/wm/keybindings/switch-to-workspace-left"."@as" = [];
-    # "org/gnome/desktop/wm/keybindings/switch-to-workspace-right"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/switch-group"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/switch-group-backward"."@as" = [];
-    "org/gnome/shell/keybindings/focus-active-notification"."@as" = [];
-    "org/gnome/settings-daemon/plugins/media-keys/screensaver"."@as" = [];
-    "org/gnome/shell/keybindings/toggle-quick-settings"."@as" = [];
-    "org/gnome/mutter/wayland/keybindings/restore-shortcuts"."@as" = [];
-    "org/gnome/shell/keybindings/toggle-application-view"."@as" = [];
-    "org/gnome/shell/keybindings/toggle-message-tray"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/switch-input-source"."@as" = [];
-    "org/gnome/desktop/wm/keybindings/switch-input-source-backward"."@as" = [];
   };
 
   # This value determines the home Manager release that your
