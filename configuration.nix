@@ -7,6 +7,8 @@
 {
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  users.defaultUserShell = pkgs.zsh;
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -47,42 +49,14 @@
     LC_TIME = "ja_JP.UTF-8";
   };
 
-  # # Enable the X11 windowing system.
-  # services.xserver.enable = true;
+  programs = {
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    };
 
-  # # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-
-  # environment.gnome.excludePackages = (with pkgs; [
-  #   gnome-photos
-  #   gnome-tour
-  # ]) ++ (with pkgs.gnome; [
-  #   cheese # webcam tool
-  #   gnome-music
-  #   gnome-terminal
-  #   gedit # text editor
-  #   epiphany # web browser
-  #   geary # email reader
-  #   evince # document viewer
-  #   gnome-characters
-  #   totem # video player
-  #   tali # poker game
-  #   iagno # go game
-  #   hitori # sudoku game
-  #   atomix # puzzle game
-  # ]);
-
-  # # Configure keymap in X11
-  # services.xserver = {
-  #   layout = "us";
-  #   xkbVariant = "";
-  # };
-
-  # programs.hyprland = {
-  #   enable = true;
-  #   package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  # };
+    zsh.enable = true;
+  };
 
   # Configure console keymap
   console.keyMap = "jp106";
@@ -127,15 +101,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    ibus
-    ibus-engines.mozc
-    gnomeExtensions.forge
+    fcitx5
+    fcitx5-mozc
+    fcitx5-configtool
+    fcitx5-gtk
   ];
-
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = [pkgs.ibus-engines.mozc];
-  };
 
   fonts = {
     packages = with pkgs; [
