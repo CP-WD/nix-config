@@ -13,7 +13,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ] ++ [
-      # inputs.xremap.nixosModules.default
+      inputs.xremap.nixosModules.default
     ];
 
   # Bootloader.
@@ -49,13 +49,28 @@
     LC_TIME = "ja_JP.UTF-8";
   };
 
-  programs = {
-    hyprland = {
-      enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    };
+  programs.zsh.enable = true;
 
-    zsh.enable = true;
+  services.picom = {
+    enable = true;
+    vSync = true;
+  };
+
+  services.displayManager = {
+    sddm.enable = true;
+    defaultSession = "none+awesome";
+  };
+
+  services.xserver = {
+    enable = true;
+
+    windowManager.awesome = {
+      enable = true;
+      luaModules = with pkgs.luaPackages; [
+        luarocks # is the package manager for Lua modules
+        luadbi-mysql # Database abstraction layer
+      ];
+    };
   };
 
   # Configure console keymap
@@ -125,70 +140,70 @@
     };
   };
 
-  # services.xremap = {
-  #   userName = "gavagai";
-  #   serviceMode = "system";
-  #   config = {
-  #     virtual_modifiers = [
-  #       "MUHENKAN"
-  #       "HENKAN"
-  #     ];
-  #     modmap = [
-  #       {
-  #         name = "";
-  #         remap = {
-  #           "CapsLock" = "LEFTALT";
-  #           "APOSTROPHE" = "RIGHTCTRL";
-  #           "SEMICOLON" = "ENTER";
-  #           "TAB" = "ESC";
-  #         };
-  #       }
-  #     ];
-  #     keymap = [
-  #       {
-  #         name = "Muhenkan";
-  #         remap = {
-  #           "MUHENKAN-y" = "Home";
-  #           "MUHENKAN-o" = "End";
+  services.xremap = {
+    userName = "gavagai";
+    serviceMode = "system";
+    config = {
+      virtual_modifiers = [
+        "MUHENKAN"
+        "HENKAN"
+      ];
+      modmap = [
+        {
+          name = "";
+          remap = {
+            "CapsLock" = "LEFTALT";
+            "APOSTROPHE" = "RIGHTCTRL";
+            "SEMICOLON" = "ENTER";
+            "TAB" = "ESC";
+          };
+        }
+      ];
+      keymap = [
+        {
+          name = "Muhenkan";
+          remap = {
+            "MUHENKAN-y" = "Home";
+            "MUHENKAN-o" = "End";
 
-  #           "MUHENKAN-h" = "Left";
-  #           "MUHENKAN-j" = "Down";
-  #           "MUHENKAN-k" = "Up";
-  #           "MUHENKAN-l" = "Right";
+            "MUHENKAN-h" = "Left";
+            "MUHENKAN-j" = "Down";
+            "MUHENKAN-k" = "Up";
+            "MUHENKAN-l" = "Right";
 
-  #           "MUHENKAN-t" = "TAB";
-  #           "MUHENKAN-n" = "BackSpace";
+            "MUHENKAN-t" = "TAB";
+            "MUHENKAN-n" = "BackSpace";
 
-  #           "MUHENKAN-Enter" = "shift-space";
-  #         };
-  #       }
-  #       {
-  #         name = "henkan";
-  #         remap = {
-  #           "HENKAN-q" = "1";
-  #           "HENKAN-w" = "2";
-  #           "HENKAN-e" = "3";
-  #           "HENKAN-r" = "4";
-  #           "HENKAN-t" = "5";
-  #           "HENKAN-y" = "6";
-  #           "HENKAN-u" = "7";
-  #           "HENKAN-i" = "8";
-  #           "HENKAN-o" = "9";
-  #           "HENKAN-p" = "0";
+            "MUHENKAN-Enter" = "shift-space";
+          };
+        }
+        {
+          name = "henkan";
+          remap = {
+            "HENKAN-q" = "1";
+            "HENKAN-w" = "2";
+            "HENKAN-e" = "3";
+            "HENKAN-r" = "4";
+            "HENKAN-t" = "5";
+            "HENKAN-y" = "6";
+            "HENKAN-u" = "7";
+            "HENKAN-i" = "8";
+            "HENKAN-o" = "9";
+            "HENKAN-p" = "0";
 
-  #           "HENKAN-m" = "APOSTROPHE";
-  #           "HENKAN-n" = "SEMICOLON";
+            "HENKAN-m" = "APOSTROPHE";
+            "HENKAN-n" = "SEMICOLON";
 
-  #           "HENKAN-h" = "LEFTBRACE";
-  #           "HENKAN-j" = "RIGHTBRACE";
-  #           "HENKAN-k" = "MINUS";
-  #           "HENKAN-l" = "EQUAL";
-  #           "HENKAN-SEMICOLON" = "BACKSLASH";
-  #         };
-  #       }
-  #     ];
-  #   };
-  # };
+            "HENKAN-h" = "LEFTBRACE";
+            "HENKAN-j" = "RIGHTBRACE";
+            "HENKAN-k" = "MINUS";
+            "HENKAN-l" = "EQUAL";
+            "HENKAN-SEMICOLON" = "BACKSLASH";
+          };
+        }
+      ];
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

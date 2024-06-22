@@ -12,9 +12,11 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    xremap.url = "github:xremap/nix-flake";
   };
 
-  outputs = inputs@{ nixpkgs, flake-utils, home-manager, hyprland, ... }: 
+  outputs = inputs@{ nixpkgs, flake-utils, home-manager, hyprland, xremap, ... }: 
   {
     nixosConfigurations = {
       myNixOS = nixpkgs.lib.nixosSystem {
