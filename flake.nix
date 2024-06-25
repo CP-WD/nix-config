@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
@@ -9,15 +9,22 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+<<<<<<< HEAD
     xremap.url = "github:xremap/nix-flake";
   };
 
   outputs = inputs@{ nixpkgs, flake-utils, home-manager, hyprland, xremap, ... }:
   {
+=======
+    # xremap.url = "github:xremap/nix-flake";
+  };
+
+  outputs = inputs@{ nixpkgs, home-manager, hyprland, ... }: {
+>>>>>>> parent of 7b78c15 (awesome前)
     nixosConfigurations = {
       myNixOS = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -32,7 +39,11 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+
+            # TODO replace ryan with your own username
             home-manager.users.gavagai = import ./home.nix;
+
+            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
           }
         ];
         specialArgs = {
