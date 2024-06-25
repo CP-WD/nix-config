@@ -16,7 +16,7 @@
     xremap.url = "github:xremap/nix-flake";
   };
 
-  outputs = inputs@{ nixpkgs, flake-utils, home-manager, hyprland, xremap, ... }: 
+  outputs = inputs@{ nixpkgs, flake-utils, home-manager, hyprland, xremap, ... }:
   {
     nixosConfigurations = {
       myNixOS = nixpkgs.lib.nixosSystem {

@@ -12,6 +12,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./config/xremap.nix
     ] ++ [
       inputs.xremap.nixosModules.default
     ];
@@ -56,21 +57,12 @@
     vSync = true;
   };
 
-  services.displayManager = {
-    sddm.enable = true;
-    defaultSession = "none+awesome";
-  };
-
   services.xserver = {
     enable = true;
-
-    windowManager.awesome = {
-      enable = true;
-      luaModules = with pkgs.luaPackages; [
-        luarocks # is the package manager for Lua modules
-        luadbi-mysql # Database abstraction layer
-      ];
-    };
+    windowManager.i3.enable = true;
+  };
+  services.displayManager = {
+    defaultSession = "none+i3";
   };
 
   # Configure console keymap
@@ -137,71 +129,6 @@
         monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
         emoji = ["Noto Color Emoji"];
       };
-    };
-  };
-
-  services.xremap = {
-    userName = "gavagai";
-    serviceMode = "system";
-    config = {
-      virtual_modifiers = [
-        "MUHENKAN"
-        "HENKAN"
-      ];
-      modmap = [
-        {
-          name = "";
-          remap = {
-            "CapsLock" = "LEFTALT";
-            "APOSTROPHE" = "RIGHTCTRL";
-            "SEMICOLON" = "ENTER";
-            "TAB" = "ESC";
-          };
-        }
-      ];
-      keymap = [
-        {
-          name = "Muhenkan";
-          remap = {
-            "MUHENKAN-y" = "Home";
-            "MUHENKAN-o" = "End";
-
-            "MUHENKAN-h" = "Left";
-            "MUHENKAN-j" = "Down";
-            "MUHENKAN-k" = "Up";
-            "MUHENKAN-l" = "Right";
-
-            "MUHENKAN-t" = "TAB";
-            "MUHENKAN-n" = "BackSpace";
-
-            "MUHENKAN-Enter" = "shift-space";
-          };
-        }
-        {
-          name = "henkan";
-          remap = {
-            "HENKAN-q" = "1";
-            "HENKAN-w" = "2";
-            "HENKAN-e" = "3";
-            "HENKAN-r" = "4";
-            "HENKAN-t" = "5";
-            "HENKAN-y" = "6";
-            "HENKAN-u" = "7";
-            "HENKAN-i" = "8";
-            "HENKAN-o" = "9";
-            "HENKAN-p" = "0";
-
-            "HENKAN-m" = "APOSTROPHE";
-            "HENKAN-n" = "SEMICOLON";
-
-            "HENKAN-h" = "LEFTBRACE";
-            "HENKAN-j" = "RIGHTBRACE";
-            "HENKAN-k" = "MINUS";
-            "HENKAN-l" = "EQUAL";
-            "HENKAN-SEMICOLON" = "BACKSLASH";
-          };
-        }
-      ];
     };
   };
 
