@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
@@ -23,16 +23,20 @@
     zoom
     _1password-gui
     _1password
+
     go
     nodejs
     gcc
     python3
 
-    fuzzel
     nil
+    fuzzel # launcher
+
     unzip
-    via
   ];
+  # ++ [
+  #   inputs.hyprsome.packages.${pkgs.system}.default # workspace manager
+  # ];
 
   programs.alacritty.enable = true;
 
@@ -42,10 +46,8 @@
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [
       fcitx5-mozc
-      # fcitx5-gtk
       fcitx5-configtool
     ];
-    # fcitx5.waylandFrontend = true;
   };
 
   # This value determines the home Manager release that your

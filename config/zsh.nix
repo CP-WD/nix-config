@@ -11,6 +11,8 @@
       ll = "ls -l";
       update = "sudo nixos-rebuild switch --flake .#myNixOS";
       vscode = "code";
+      soundvolume = "alsamixer";
+      shutdown = "sudo shutdown now";
     };
 
     history = {

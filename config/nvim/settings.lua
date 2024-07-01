@@ -2,7 +2,7 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 -- Insert mode mapping
-keymap.set("i", "jk", "<ESC>", opts)
+keymap.set("i", "jj", "<ESC>", opts)
 
 -- Normal mode mappings
 keymap.set("n", "<C-h>", "^", opts)
