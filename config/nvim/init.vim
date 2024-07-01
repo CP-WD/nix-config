@@ -1,1 +1,1 @@
-:lua require(settings)
+:luafile ~/.config/nvim/settings.lua

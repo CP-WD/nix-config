@@ -13,6 +13,7 @@ keymap.set("n", "+", "<C-a>", opts)
 keymap.set("n", "-", "<C-x>", opts)
 
 -- To avoid easymotion
+keymap.set("n", "x", "i", opts)
 keymap.set("n", "s", '"_s', opts)
 
 -- Visual mode mappings
