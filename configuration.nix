@@ -2,17 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
+  users.defaultUserShell = pkgs.zsh;
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./config/xremap.nix
-    ] ++ [
-      inputs.xremap.nixosModules.default
     ];
 
   # Bootloader.
@@ -48,22 +46,20 @@
     LC_TIME = "ja_JP.UTF-8";
   };
 
-<<<<<<< HEAD
   programs.zsh.enable = true;
 
-  services.picom = {
-    enable = true;
-    vSync = true;
-  };
+  # services.picom = {
+  #   enable = true;
+  #   vSync = true;
+  # };
 
-  services.xserver = {
-    enable = true;
-    windowManager.i3.enable = true;
-  };
-  services.displayManager = {
-    defaultSession = "none+i3";
-  };
-=======
+  # services.xserver = {
+  #   enable = true;
+  #   windowManager.i3.enable = true;
+  # };
+  # services.displayManager = {
+  #   defaultSession = "none+i3";
+  # };
   # # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
@@ -100,7 +96,6 @@
   #   enable = true;
   #   package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   # };
->>>>>>> parent of 7b78c15 (awesome前)
 
   # Configure console keymap
   console.keyMap = "jp106";
@@ -126,6 +121,11 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  services.udev.packages = [
+    pkgs.platformio-core
+    pkgs.openocd
+  ];
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;

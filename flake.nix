@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
@@ -9,22 +9,12 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-<<<<<<< HEAD
-    xremap.url = "github:xremap/nix-flake";
-  };
-
-  outputs = inputs@{ nixpkgs, flake-utils, home-manager, hyprland, xremap, ... }:
-  {
-=======
-    # xremap.url = "github:xremap/nix-flake";
   };
 
   outputs = inputs@{ nixpkgs, home-manager, hyprland, ... }: {
->>>>>>> parent of 7b78c15 (awesome前)
     nixosConfigurations = {
       myNixOS = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
