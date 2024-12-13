@@ -7,6 +7,8 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    envExtra = "disable r";
+
     shellAliases = {
       ll = "ls -l";
       update = "sudo nixos-rebuild switch --flake .#myNixOS";

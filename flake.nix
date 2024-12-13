@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
+    hyprsome.url = "github:sopa0/hyprsome";
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
@@ -14,7 +15,10 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, hyprland, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, hyprland, ... }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
     nixosConfigurations = {
       myNixOS = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -32,6 +36,9 @@
 
             # TODO replace ryan with your own username
             home-manager.users.gavagai = import ./home.nix;
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+            };
 
             # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
           }

@@ -14,7 +14,7 @@
   home.username = "gavagai";
   home.homeDirectory = "/home/gavagai";
 
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     spotify
     vivaldi
     vscode
@@ -23,6 +23,10 @@
     zoom
     _1password-gui
     _1password
+    gitkraken
+    zed-editor
+    typst
+    typst-lsp
 
     go
     nodejs
@@ -33,10 +37,18 @@
     fuzzel # launcher
 
     unzip
+    pdfarranger
+    awscli2
+    blueberry
+    R
+    gdb
+    cunit
+    rustup
+    mypy
+    zoom
+  ]) ++ [
+    inputs.hyprsome.packages.${pkgs.system}.default
   ];
-  # ++ [
-  #   inputs.hyprsome.packages.${pkgs.system}.default # workspace manager
-  # ];
 
   programs.alacritty.enable = true;
 
